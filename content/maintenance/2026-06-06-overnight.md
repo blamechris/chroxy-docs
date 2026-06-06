@@ -84,6 +84,12 @@ This page is the live journal. The loop appends to the **Activity log** each ite
   `ActivityTreeNode.children` is readonly. Test: 20k-deep chain doesn't throw; **verified the
   pre-fix recursion RangeErrors at that depth**. store-core 1175/1175, tsc clean. **4 of ~6
   fix PRs.** Next: #5240 (gh --limit) or #5241 (maxBuffer).
+- **04:08** — **#5240 + #5241 fixed → PR #5251** (one PR, both survey.js probe-robustness bugs).
+  `gh pr list` now passes `--limit 200` (was silently capped at 30); `tryExec` now passes
+  `maxBuffer: 16MB` so a >1MB `git status` no longer rejects → mislabels a real repo as "not a
+  git repo". Tests via the `_execFile` capture seam; **mutation-verified** (revert either → its
+  test fails). 66 survey+handler tests green. **5 of ~6 fix PRs.** Next: one final fix (#5245
+  worktree re-lock), then wind down.
 
 ## Deferred / needs human
 
@@ -104,6 +110,7 @@ This page is the live journal. The loop appends to the **Activity log** each ite
 - [#5239](https://github.com/blamechris/chroxy/pull/5239) — feat(server): `chroxy credentials rekey` — rotate the at-rest data key (closes #5229)
 - [#5249](https://github.com/blamechris/chroxy/pull/5249) — fix(server): worktree gc must not delete gitignored content (closes #5244, HIGH data-loss), mutation-verified
 - [#5250](https://github.com/blamechris/chroxy/pull/5250) — fix(store-core): iterative activity-tree build, no deep-chain stack overflow (closes #5247, render DoS)
+- [#5251](https://github.com/blamechris/chroxy/pull/5251) — fix(server): survey probes robust to large output + many PRs (closes #5240 + #5241), mutation-verified
 
 ## Issues filed tonight
 
