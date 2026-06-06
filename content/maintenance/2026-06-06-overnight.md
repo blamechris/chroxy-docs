@@ -55,6 +55,13 @@ This page is the live journal. The loop appends to the **Activity log** each ite
   openers must leave the composer empty. **Mutation-verified**: reverting the `seed || null`
   clear in `openCreateSession` fails both leak tests while the positive control still passes.
   Full App.test.tsx 97/97 green. Test-only (App.tsx untouched). Next: pick another item.
+- **03:34** — **#5229 done → PR #5239.** Implemented credential data-key rotation. Added
+  `rotateMasterKey`/`setMasterKey` (cipher), `rekeyCredentialStore()` (store: decrypt →
+  rotate → atomic re-encrypt, with keychain rollback on write failure), and a
+  `chroxy credentials rekey [--json]` CLI mirroring `worktree gc`. 13 tests incl. the
+  write-failure rollback + read-error-leaves-key-untouched paths; both CI lints + eslint
+  green. CLI verified via `--help` only (did NOT run the real rotation — it would touch the
+  real keychain). Crash-window across file+keychain documented in the PR for review.
 
 ## Deferred / needs human
 
@@ -64,6 +71,7 @@ This page is the live journal. The loop appends to the **Activity log** each ite
 
 - [#5237](https://github.com/blamechris/chroxy/pull/5237) — chore: coverage-audit cleanup (foundation, opened pre-loop)
 - [#5238](https://github.com/blamechris/chroxy/pull/5238) — test(dashboard): Investigate-seed no-leak regression (closes #5218), mutation-verified
+- [#5239](https://github.com/blamechris/chroxy/pull/5239) — feat(server): `chroxy credentials rekey` — rotate the at-rest data key (closes #5229)
 
 ## Issues filed tonight
 
