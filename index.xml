@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>Chroxy Documentation</title>
+      <link>https://www.blamechris.com/chroxy-docs</link>
+      <description>Last 10 notes on Chroxy Documentation</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Architecture</title>
+    <link>https://www.blamechris.com/chroxy-docs/architecture</link>
+    <guid>https://www.blamechris.com/chroxy-docs/architecture</guid>
+    <description><![CDATA[ Chroxy is a self-hosted daemon that bridges remote clients to a local AI coding CLI. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 05:41:51 GMT</pubDate>
+  </item><item>
+    <title>Configuration</title>
+    <link>https://www.blamechris.com/chroxy-docs/configuration</link>
+    <guid>https://www.blamechris.com/chroxy-docs/configuration</guid>
+    <description><![CDATA[ Chroxy resolves configuration from multiple sources with a clear precedence order. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 05:41:51 GMT</pubDate>
+  </item><item>
+    <title>Container Isolation</title>
+    <link>https://www.blamechris.com/chroxy-docs/container-isolation</link>
+    <guid>https://www.blamechris.com/chroxy-docs/container-isolation</guid>
+    <description><![CDATA[ Chroxy supports three levels of session isolation, from lightweight sandboxing to full Docker containers, so you can constrain what an AI session can touch on the host. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 05:41:51 GMT</pubDate>
+  </item><item>
+    <title>Developer Guide</title>
+    <link>https://www.blamechris.com/chroxy-docs/developer-guide</link>
+    <guid>https://www.blamechris.com/chroxy-docs/developer-guide</guid>
+    <description><![CDATA[ This page covers running Chroxy locally, the repo layout, and how to extend it. For the system overview see Architecture. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 05:41:51 GMT</pubDate>
+  </item><item>
+    <title>Chroxy Documentation</title>
+    <link>https://www.blamechris.com/chroxy-docs/</link>
+    <guid>https://www.blamechris.com/chroxy-docs/</guid>
+    <description><![CDATA[ Chroxy is a remote terminal and chat front-end for AI coding CLIs. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 05:41:51 GMT</pubDate>
+  </item><item>
+    <title>Providers</title>
+    <link>https://www.blamechris.com/chroxy-docs/providers</link>
+    <guid>https://www.blamechris.com/chroxy-docs/providers</guid>
+    <description><![CDATA[ Chroxy runs AI coding sessions through pluggable providers. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 05:41:51 GMT</pubDate>
+  </item><item>
+    <title>Security &amp; Encryption</title>
+    <link>https://www.blamechris.com/chroxy-docs/security</link>
+    <guid>https://www.blamechris.com/chroxy-docs/security</guid>
+    <description><![CDATA[ Chroxy is self-hosted: the server daemon runs on the user’s own development machine, and remote clients connect to it through a Cloudflare tunnel. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 05:41:51 GMT</pubDate>
+  </item><item>
+    <title>Skills</title>
+    <link>https://www.blamechris.com/chroxy-docs/skills</link>
+    <guid>https://www.blamechris.com/chroxy-docs/skills</guid>
+    <description><![CDATA[ Skills are reusable instruction snippets that Chroxy injects into every session you start. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 05:41:51 GMT</pubDate>
+  </item><item>
+    <title>Overnight maintenance session — 2026-06-06</title>
+    <link>https://www.blamechris.com/chroxy-docs/maintenance/2026-06-06-overnight</link>
+    <guid>https://www.blamechris.com/chroxy-docs/maintenance/2026-06-06-overnight</guid>
+    <description><![CDATA[ Overnight maintenance session — 2026-06-06 Autonomous, self-paced run kicked off before bed. Mode: aggressive. ]]></description>
+    <pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
