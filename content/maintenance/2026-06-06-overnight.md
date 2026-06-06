@@ -62,10 +62,27 @@ This page is the live journal. The loop appends to the **Activity log** each ite
   write-failure rollback + read-error-leaves-key-untouched paths; both CI lints + eslint
   green. CLI verified via `--help` only (did NOT run the real rotation — it would touch the
   real keychain). Crash-window across file+keychain documented in the PR for review.
+- **03:46** — Safe auto-fixable issue queue is dry (rest need judgement/admin/live-TUI/epics —
+  see Deferred). Ran a **bug-hunt swarm** (15 agents: 6 finders over recently-changed modules →
+  adversarial verify each candidate, refute-by-default). **9 real bugs confirmed** (reproduced
+  where possible), filed as #5240–#5248. Headline: **#5244 (HIGH, data loss)** — `worktree gc`'s
+  clean check ignores gitignored files, so `worktree remove` silently deletes node_modules/.env;
+  auto-triggers on startup with `autoReap`. **Top fix candidate for the next iteration.** Other
+  notables: #5247 activity-reducer stack-overflow DoS of the Control Room render; #5248 background-
+  shell mtime false-reap re-opens the #4307 idle-timeout bug; #5242 encrypted creds silently
+  resolve null on a recoverable keychain error (spawns unauthenticated).
 
 ## Deferred / needs human
 
-- _(none yet)_
+- **#5230** (keychain-unavailable: plaintext fallback vs refuse-to-store) — security-posture decision; could break no-keychain hosts. Needs your call.
+- **#5155** (should pairing-bound tokens overwrite credentials?) — security policy question, not a mechanical fix.
+- **#3816** (tighten branch protection / Actions fork-PR) — repo-admin + irreversible settings; do interactively.
+- **#3808** (sign Windows MSI) — needs signing certs/secrets/infra.
+- **#4880 / #4882** (empirical TUI byte-sequence re-recording) — require a live claude TUI; can't drive headless.
+- **#3954 / #3955 / #3956** (claude-channel bridge chain) — #3954 needs a live claude session (per project memory); #3955/#3956 are downstream of it.
+- **#2661 / #5159 / #3699** — large epics, not a single safe PR.
+- **#3840** (revisit gating *if* a directory-trust UI is added) — conditional/future; not actionable yet.
+- Audit-backlog Maestro flows (child-agent #5135, resume-unknown #4971, session-stopped #4879) — writable but E2E-verification needs a booted simulator + Metro; not reliably runnable headless. Left for a hands-on pass.
 
 ## PRs opened tonight
 
@@ -75,4 +92,14 @@ This page is the live journal. The loop appends to the **Activity log** each ite
 
 ## Issues filed tonight
 
-- _(none yet)_
+From the bug-hunt swarm (all adversarially verified, `audit-finding` label):
+
+- **[#5244](https://github.com/blamechris/chroxy/issues/5244) — HIGH / data-loss**: worktree gc clean-check ignores gitignored files → `worktree remove` deletes node_modules/.env (auto on startup). **Fix next.**
+- [#5247](https://github.com/blamechris/chroxy/issues/5247) — activity-reducer unbounded recursion → RangeError crashes Control Room render (DoS).
+- [#5248](https://github.com/blamechris/chroxy/issues/5248) — background-shell mtime reap false-positives on output-then-idle procs (re-opens #4307).
+- [#5242](https://github.com/blamechris/chroxy/issues/5242) — encrypted creds silently resolve null on recoverable keychain error → unauthenticated spawn (related to #5230).
+- [#5240](https://github.com/blamechris/chroxy/issues/5240) — `gh pr list` lacks `--limit` → Control Room PR rollup capped at 30.
+- [#5245](https://github.com/blamechris/chroxy/issues/5245) — worktree gc failed-remove leaves worktree permanently unlocked.
+- [#5241](https://github.com/blamechris/chroxy/issues/5241) — survey missing maxBuffer mislabels a large dirty repo as "not a git repo".
+- [#5243](https://github.com/blamechris/chroxy/issues/5243) — win32 credential write unlinks before rename (crash-window data loss).
+- [#5246](https://github.com/blamechris/chroxy/issues/5246) — worktree gc transient stat failure inflates reclaimed count.
