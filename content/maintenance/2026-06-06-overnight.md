@@ -49,6 +49,12 @@ This page is the live journal. The loop appends to the **Activity log** each ite
 - **00:00** — Session bootstrapped. PR #5237 opened and verified (live smoke 17/17,
   Control Room table rendered, session-state intact). Journal created. Selecting first
   work item.
+- **03:21** — **#5218 done → PR #5238.** Added the deferred Investigate-seed no-leak
+  regression test (App.test.tsx). Gave the `CreateSessionModal` mock an `onCreate` seam;
+  positive control proves the seed lands, then header-overflow + command-palette plain
+  openers must leave the composer empty. **Mutation-verified**: reverting the `seed || null`
+  clear in `openCreateSession` fails both leak tests while the positive control still passes.
+  Full App.test.tsx 97/97 green. Test-only (App.tsx untouched). Next: pick another item.
 
 ## Deferred / needs human
 
@@ -57,6 +63,7 @@ This page is the live journal. The loop appends to the **Activity log** each ite
 ## PRs opened tonight
 
 - [#5237](https://github.com/blamechris/chroxy/pull/5237) — chore: coverage-audit cleanup (foundation, opened pre-loop)
+- [#5238](https://github.com/blamechris/chroxy/pull/5238) — test(dashboard): Investigate-seed no-leak regression (closes #5218), mutation-verified
 
 ## Issues filed tonight
 
