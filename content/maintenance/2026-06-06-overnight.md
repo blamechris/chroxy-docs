@@ -77,6 +77,13 @@ This page is the live journal. The loop appends to the **Activity log** each ite
   (reverting `--ignored` deletes the worktree + its secret → both tests fail). worktree-gc 24/24,
   both lints green. No real `worktree gc --apply` run — all exercised in /tmp repos. **3 of ~6
   fix PRs.** Next: #5247 (activity-reducer recursion) or #5240 (gh --limit).
+- **04:01** — **#5247 fixed → PR #5250.** Converted `selectActivityTree`'s recursive tree
+  build to an explicit-stack post-order iterative traversal — a deep wire-controlled parentId
+  chain no longer overflows the stack and crashes the Control Room render. Output identical
+  (order/cycle/visited-once preserved); had to construct nodes post-order because
+  `ActivityTreeNode.children` is readonly. Test: 20k-deep chain doesn't throw; **verified the
+  pre-fix recursion RangeErrors at that depth**. store-core 1175/1175, tsc clean. **4 of ~6
+  fix PRs.** Next: #5240 (gh --limit) or #5241 (maxBuffer).
 
 ## Deferred / needs human
 
@@ -96,6 +103,7 @@ This page is the live journal. The loop appends to the **Activity log** each ite
 - [#5238](https://github.com/blamechris/chroxy/pull/5238) — test(dashboard): Investigate-seed no-leak regression (closes #5218), mutation-verified
 - [#5239](https://github.com/blamechris/chroxy/pull/5239) — feat(server): `chroxy credentials rekey` — rotate the at-rest data key (closes #5229)
 - [#5249](https://github.com/blamechris/chroxy/pull/5249) — fix(server): worktree gc must not delete gitignored content (closes #5244, HIGH data-loss), mutation-verified
+- [#5250](https://github.com/blamechris/chroxy/pull/5250) — fix(store-core): iterative activity-tree build, no deep-chain stack overflow (closes #5247, render DoS)
 
 ## Issues filed tonight
 
