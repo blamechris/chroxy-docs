@@ -71,6 +71,12 @@ This page is the live journal. The loop appends to the **Activity log** each ite
   notables: #5247 activity-reducer stack-overflow DoS of the Control Room render; #5248 background-
   shell mtime false-reap re-opens the #4307 idle-timeout bug; #5242 encrypted creds silently
   resolve null on a recoverable keychain error (spawns unauthenticated).
+- **03:52** — **#5244 fixed → PR #5249** (the HIGH data-loss bug). `isClean()` now runs
+  `git status --porcelain --ignored` so a worktree holding only gitignored content
+  (node_modules/.env) is skipped, not removed. 2 new real-temp-repo tests; **mutation-verified**
+  (reverting `--ignored` deletes the worktree + its secret → both tests fail). worktree-gc 24/24,
+  both lints green. No real `worktree gc --apply` run — all exercised in /tmp repos. **3 of ~6
+  fix PRs.** Next: #5247 (activity-reducer recursion) or #5240 (gh --limit).
 
 ## Deferred / needs human
 
@@ -89,6 +95,7 @@ This page is the live journal. The loop appends to the **Activity log** each ite
 - [#5237](https://github.com/blamechris/chroxy/pull/5237) — chore: coverage-audit cleanup (foundation, opened pre-loop)
 - [#5238](https://github.com/blamechris/chroxy/pull/5238) — test(dashboard): Investigate-seed no-leak regression (closes #5218), mutation-verified
 - [#5239](https://github.com/blamechris/chroxy/pull/5239) — feat(server): `chroxy credentials rekey` — rotate the at-rest data key (closes #5229)
+- [#5249](https://github.com/blamechris/chroxy/pull/5249) — fix(server): worktree gc must not delete gitignored content (closes #5244, HIGH data-loss), mutation-verified
 
 ## Issues filed tonight
 
