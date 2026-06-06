@@ -13,6 +13,37 @@ morning review.
 
 This page is the live journal. The loop appends to the **Activity log** each iteration.
 
+---
+
+## ☀️ Morning summary — start here
+
+The overnight loop has wound down (hit the ~6 fix-PR soft cap and ended cleanly at ~04:12).
+Everything below is reviewable and reversible; **nothing was merged.**
+
+**6 PRs to review** (all tests + lints green; fixes mutation-verified):
+
+| PR | What | Closes |
+|----|------|--------|
+| [#5237](https://github.com/blamechris/chroxy/pull/5237) | Coverage-audit cleanup: smoke-tooling fix + Control Room smoke coverage + skill refresh | — |
+| [#5238](https://github.com/blamechris/chroxy/pull/5238) | Investigate-seed no-leak regression test | #5218 |
+| [#5239](https://github.com/blamechris/chroxy/pull/5239) | `chroxy credentials rekey` — rotate the at-rest data key | #5229 |
+| [#5249](https://github.com/blamechris/chroxy/pull/5249) | **worktree gc no longer deletes gitignored content (HIGH data-loss)** | #5244 |
+| [#5250](https://github.com/blamechris/chroxy/pull/5250) | Iterative activity-tree build (deep-chain render DoS) | #5247 |
+| [#5251](https://github.com/blamechris/chroxy/pull/5251) | Survey probes: `gh --limit` + exec `maxBuffer` | #5240, #5241 |
+| [#5252](https://github.com/blamechris/chroxy/pull/5252) | Re-lock a worktree when removal fails mid-reclaim | #5245 |
+
+**Suggested review order:** #5249 first (HIGH, auto-triggered data loss), then #5250 (DoS), then the rest. #5237 bundles the smoke-tooling fix you watched land live.
+
+**Bug backlog filed tonight (9, all adversarially verified, `audit-finding` label):**
+- ✅ Now fixed by a PR: #5244→#5249, #5247→#5250, #5240/#5241→#5251, #5245→#5252.
+- ⬜ Still open for you: **#5242** (encrypted creds silently resolve null on a recoverable keychain error → unauthenticated spawn; needs an observability decision), **#5243** (win32 credential write unlinks before rename — small, Windows-only, drop the unlink), **#5246** (worktree prune transient-stat false count — reporting only), **#5248** (background-shell mtime reaping false-positives → re-opens #4307; needs a design call on liveness authority).
+
+**Needs-your-judgement queue (deferred, not touched):** #5230, #5155 (security posture), #3816, #3808 (admin/secrets), #4880, #4882 (live claude-TUI), #3954–#3956, #2661, #5159, #3699 (epics/blocked), #3840 (conditional). See the Deferred section below for one-line reasons.
+
+**Coverage-audit report (local, gitignored):** `chroxy/docs/audit-results/coverage-audit-2026-06-06.html`.
+
+---
+
 ## Guardrails (self-imposed)
 
 - Never commit to `main`; branch from an up-to-date `main` per task. Never merge any PR.
@@ -90,6 +121,12 @@ This page is the live journal. The loop appends to the **Activity log** each ite
   git repo". Tests via the `_execFile` capture seam; **mutation-verified** (revert either → its
   test fails). 66 survey+handler tests green. **5 of ~6 fix PRs.** Next: one final fix (#5245
   worktree re-lock), then wind down.
+- **04:12** — **#5245 fixed → PR #5252** (final fix; soft cap reached). applyPlan now re-locks a
+  worktree with its original reason if `git worktree remove` fails after the unlock (TOCTOU
+  dirty-after-plan), so a failed reclaim leaves lock state + dead-pid provenance intact. Real-
+  temp-repo test; **mutation-verified** (no re-lock → worktree left unlocked → test fails).
+  worktree-gc green, both lints pass. **6 of ~6 — loop winding down.** Wrote the Morning summary
+  (top of this page) and STOPPED the loop. Good morning! 👋
 
 ## Deferred / needs human
 
@@ -111,6 +148,7 @@ This page is the live journal. The loop appends to the **Activity log** each ite
 - [#5249](https://github.com/blamechris/chroxy/pull/5249) — fix(server): worktree gc must not delete gitignored content (closes #5244, HIGH data-loss), mutation-verified
 - [#5250](https://github.com/blamechris/chroxy/pull/5250) — fix(store-core): iterative activity-tree build, no deep-chain stack overflow (closes #5247, render DoS)
 - [#5251](https://github.com/blamechris/chroxy/pull/5251) — fix(server): survey probes robust to large output + many PRs (closes #5240 + #5241), mutation-verified
+- [#5252](https://github.com/blamechris/chroxy/pull/5252) — fix(server): re-lock a worktree when removal fails mid-reclaim (closes #5245), mutation-verified
 
 ## Issues filed tonight
 
